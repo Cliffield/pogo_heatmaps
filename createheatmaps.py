@@ -18,13 +18,8 @@ df = pd.read_sql_query("SELECT * from pokemon", con)
 # close connection to database
 con.close()
 
-# get eoncountered pokemon_ids
-found_pokemon = df.drop_duplicates(subset = "pokemon_id")
-
-# sort pokemon_id ascending
-found_pokemon_sorted = found_pokemon.sort_values(by = "pokemon_id")
-
-found_pokemon_sortet_list = found_pokemon_sorted["pokemon_id"].values.tolist()
+# sort pokemon_id ascending and get every pokemon_id only once in the array
+found_pokemon_id = df[("pokemon_id")].sort_values().unique()
 
 # test if folder maps exist, else create it
 try: 
@@ -34,20 +29,20 @@ except OSError:
         raise
 
 # create heatmaps (html-files) for eoncoutered pokemons 
-for x in found_pokemon_sortet_list:
+for x in found_pokemon_id:
 	
 	pokeid = x
 	
 	df_pokeid = df[(df["pokemon_id"] == pokeid)]
 	
 	# get weight (times of spawns per pokemon and spawnpoint)
-	df_pokeid["weight"] = df_pokeid.groupby("spawnpoint_id")["spawnpoint_id"].transform(len)
+	weight = df_pokeid.groupby("spawnpoint_id")["spawnpoint_id"].transform(len)
 	
-	# delete spawnpoint duplets (necesarry? )
+	# delete spawnpoint duplets
 	df_pokeid = df_pokeid.drop_duplicates(subset = "spawnpoint_id")
 	
 	# to list
-	xyz = zip(df_pokeid.latitude, df_pokeid.longitude, df_pokeid.weight)
+	LatLngWei = zip(df_pokeid.latitude, df_pokeid.longitude, weight)
 	
 	# create html-files
 	PATH = os.path.dirname(os.path.abspath(__file__))
@@ -62,11 +57,9 @@ for x in found_pokemon_sortet_list:
 	
 	def create_maps_html():
 		fname = output_folder + "/map_" + str(pokeid) + ".html"
-		LatLngWei = xyz
 		context = {
  		"LatLngWei": LatLngWei,
 		}
-		#
 		with open(fname, "w") as f:
 			html = render_template("maps.html", context)
 			f.write(html)
