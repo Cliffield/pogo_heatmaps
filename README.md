@@ -1,5 +1,7 @@
 # pogo_heatmaps
-creates heatmaps from PogemonGo-Map
+creates heatmaps from PogemonGo-Map database
+
+It creates for every particular pokemon a heatmap in the subfolder "maps". The mapped spawnpoints are weightet by the count of spaws of the particular pokemon at this spawnpiont. The heatmaps are just html-files with coordinates and the weigth using google maps api for heatmaps.
 
 1. Set path of sqlite database in createheatmaps.py:	<br>
 		db = "EXAMPLE.db"	<br>
