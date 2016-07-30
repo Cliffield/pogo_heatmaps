@@ -1,15 +1,38 @@
 # pogo_heatmaps
-creates heatmaps from PogemonGo-Map
+creates heatmaps from PokemonGo-Map gathered data
+Maps use weigthed locations; weight by number of spawns of particular pokemon.
 
-1. Set path of sqlite database in createheatmaps.py:	<br>
-		db = "EXAMPLE.db"	<br>
+Data import from sqlite and MySQL-Database possible
+Just set configs at head of script.
 
-2. Set latitute and longitude for startpoint of map in templates/map.html	<br>
-		function initMap(){	<br>
-		map = new google.maps.Map(document.getElementById('map'),	{<br>
-		zoom: 13,	<br>
-		center: {lat: 25.200254, lng: 4.100210 }, <-- change 25.200254 and 4.100210 to your point of interest	<br>
-		mapTypeId: google.maps.MapTypeId.MAP	<br>
+'''
+########################################################
+## define settings here
+########################################################
+input_type = "sqlite" # "sqlite" or "MySQL"
 
-3. Set Google Maps API in tempates/map.html ( 4th last line)<br>
-  
+# for sqlite
+database = "pogom.db" # sqlite filename e.g. "pogom.db" 
+
+# for MySQL
+host="127.0.0.1" #host
+user="dbuser" # user
+password="foo" # password
+db="bar" # database
+
+output_folder = "maps" # output folder for maps e.g. "maps"
+
+# startpoint of map; change to your poi
+lat_start = "52.211184" # latitude
+lng_start = "13.047870" # longitude
+
+GoogleMapsKey = "insert_key_here" # GMAPS_API_KEY 
+
+language = "en" # pokemon names in "en", "fr" or "de"
+########################################################
+'''  
+
+
+![Alt text](/static/screenshot.png?raw=true "screenshot")
+
+
