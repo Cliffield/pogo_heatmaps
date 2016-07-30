@@ -1,9 +1,12 @@
 # pogo_heatmaps
-creates heatmaps from PokemonGo-Map gathered data
-Maps use weigthed locations; weight by number of spawns of particular pokemon.
 
+creates heatmaps from PokemonGo-Map gathered data<br>
+It creates for every particular pokemon a heatmap in the subfolder "maps". The mapped spawnpoints are weightet by the count of spaws of the particular pokemon at this spawnpiont. The heatmaps are just html-files with coordinates and the weigth using google maps api for heatmaps.
+
+<p>
 Data import from sqlite and MySQL-Database possible
 Just set configs at head of script.
+</p>
 
 '''
 ########################################################
