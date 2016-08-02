@@ -3,7 +3,6 @@
 import os
 from jinja2 import Environment, FileSystemLoader
 import sqlite3
-#import MySQLdb #packet name is MySQL-python
 import pymysql
 import pandas as pd
 
@@ -29,7 +28,7 @@ lng_start = "13.047870" # longitude
 
 GoogleMapsKey = "insert_key_here" # GMAPS_API_KEY 
 
-language = "en" # pokemon names in "en", "fr" or "de"
+language = "en" # pokemon names in "en", "fr" or "de" or maybe any other language from PokemonGo_Map locales folder
 ########################################################
 
 
@@ -69,7 +68,7 @@ def create_index():
 	}
 	with open(fname, "w") as f:
 		html = render_template("index.html", context)
-		f.write(html)
+		f.write(html.encode("UTF-8")
 
 if input_type.lower() == "sqlite":
     con = sqlite3.connect(database)
