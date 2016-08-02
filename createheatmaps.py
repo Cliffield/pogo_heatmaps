@@ -68,7 +68,7 @@ def create_index():
 	}
 	with open(fname, "w") as f:
 		html = render_template("index.html", context)
-		f.write(html.encode("UTF-8")
+		f.write(html.encode("UTF-8"))
 
 if input_type.lower() == "sqlite":
     con = sqlite3.connect(database)
